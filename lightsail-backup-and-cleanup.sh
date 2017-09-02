@@ -3,13 +3,11 @@
 ######################################
 ##   CREATE A NEW SNAPSHOT BACKUP   ##
 ######################################
-## Adjust 'NameOfYourBackup' to whatever your backup name you'd like to be
-## Adjust 'NameOfYourInstance' to actual name of the Lightsail Instance (you can find the name of your instance in the Lightsail console)
-## Adjust 'Region' to the region where your Lightsail instance is located.
+## This script takes in three arguments the name of your instance, the region, and the number of snapshots to keep.
 
-NameOfYourInstance="BWTC_Web"
+NameOfYourInstance=$1
 NameOfYourBackup=$NameOfYourInstance
-Region="us-east-2"
+Region=$2
 
 aws lightsail create-instance-snapshot --instance-snapshot-name ${NameOfYourBackup}-$(date +%Y-%m-%d_%H.%M) --instance-name $NameOfYourInstance --region $Region
 
@@ -20,7 +18,7 @@ sleep 30
 ##   DELETE OLD SNAPSHOTS   ##
 ##############################
 # Set number of snapshots you'd like to keep in your account
-snapshotsToKeep=30
+snapshotsToKeep=$3
 echo "Number of Instance Snapshots to keep: ${snapshotsToKeep}"
 
 # get the total number of available Lightsail snapshots
