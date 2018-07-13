@@ -14,9 +14,9 @@ aws lightsail create-instance-snapshot --instance-snapshot-name ${NameOfYourBack
 ## Delay before initiating clean up of old snapshots
 sleep 30
 
-##############################
-##   DELETE OLD SNAPSHOTS   ##
-##############################
+###############################################
+##   DELETE OLD SNAPSHOTS + RETAIN SNAPSHOTS ##
+###############################################
 # Set number of snapshots you'd like to keep in your account
 snapshotsToKeep=$3
 echo "Number of Instance Snapshots to keep: ${snapshotsToKeep}"
