@@ -26,7 +26,7 @@ numberOfSnapshots=$(aws lightsail get-instance-snapshots | jq '[.[]  | select(.[
 echo "Number of instance snapshots: ${numberOfSnapshots}"
 
 # get the names of all snapshots sorted from old to new
-SnapshotNames=$(aws lightsail get-instance-snapshots | jq '.[] | sort_by(.createdAt) | select(.[0].fromInstanceName == "'${NameOfYourInstance}'") | .[].name')
+SnapshotNames=$(aws lightsail get-instance-snapshots | jq '.[] | sort_by(.createdAt) | map(select(.fromInstanceName == "'${NameOfYourInstance}'")) | .[].name')
 
 # loop through all snapshots
 while IFS= read -r line 
